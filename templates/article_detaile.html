@@ -1,0 +1,36 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+ 							<span class="posted-on"><time class="entry-date published" date="2013-06-17">{{ article.time }}</time></span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="single.html" rel="bookmark">{{ article.title }}</a></h1>
+					</header>
+					<div class="entry-content">
+                        {% for p in all_text %}
+                             {% if p.title %}<h2>{{ p.title }}</h2>{% endif %}
+                            <p>{{ p.text }}</p>
+                        {% endfor %}
+					</div>
+				</article><!-- #post-## -->
+
+			</div>
+		</div> <!-- /row post  -->
+
+
+
+	</div>	<!-- /container -->
+
+</main>
+{% endblock %}
