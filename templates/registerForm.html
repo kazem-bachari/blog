@@ -1,0 +1,10 @@
+{% extends 'layout/layout.html' %}
+{% block title %}Register {% endblock %}
+{% block content %}
+    <form method="post" class="w-50 mx-auto">
+       {% csrf_token %}
+       {{ form }}
+        <input type="submit" class="d-block shadow-lg btn text-light px-5 py-2 mx-auto my-5 bg-black" value="Register"  value="login">
+
+    </form>
+{% endblock %}
