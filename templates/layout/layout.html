@@ -7,10 +7,10 @@
 	<meta name="description" content="">
 	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-	<title>Initio - Free, multipurpose html5 template by GetTemplate</title>
+	<title style="text-transform: uppercase">{% block title %}{% endblock %}</title>
 
 	<link rel="shortcut icon" href="{% static 'images/gt_favicon.png' %}">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<!-- Bootstrap -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
 	<!-- Icons -->
@@ -20,46 +20,35 @@
 	<!-- Custom styles -->
 	<link rel="stylesheet" href={% static "css/styles.css" %}>
 
-	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
 </head>
 <body class="home">
 
 <header id="header">
 	<div id="head" class="parallax" parallax-speed="2">
+ <form action="/articles/search">
+    <input class="form-control my-3 w-75 mx-auto d-block" name="q"  type="search" placeholder="Search">
+
+    </form>
 		<h1 id="logo" class="text-center">
 			<img class="img-circle" src="{%static 'images/guy.jpg'%}" alt="">
-			<span class="title">Anthony Russel</span>
-			<span class="tagline">A mystery person<br>
-				<a href="">anthony.russel42@example.com</a></span>
+			<span class="title">{{ user.username }}</span>
+			<span class="tagline"><span>{{ user.first_name }}</span> <span class="mx-3">{{ user.last_name }}</span><br>
+				<a href="">{{ user.email }}</a></span>
 		</h1>
+        {% if user.is_authenticated %}
+            <a href="logout" class=" btn bg-primary px-5 py-2 m-4 mx-auto w-25 d-block text-light ">logout</a>
+        {% else %}
+            <a href="/login" class=" btn bg-success px-5 py-2 m-4 mx-auto w-25 d-block text-light ">login</a>
+            <a href="/register" class=" btn bg-dark px-5 py-2 m-4 mx-auto w-25 d-block text-light ">register</a>
+        {% endif %}
 	</div>
 
-	<nav class="navbar navbar-default navbar-sticky">
-		<div class="container-fluid">
-
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-			</div>
-
-			<div class="navbar-collapse collapse">
-
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-left.html">Left Sidebar</a></li>
-							<li><a href="sidebar-right.html">Right Sidebar</a></li>
-							<li><a href="single.html">Blog Post</a></li>
-						</ul>
-					</li>
-					<li><a href="blog.html">Blog</a></li>
-				</ul>
-
-			</div><!--/.nav-collapse -->
-		</div>
-	</nav>
+	<div class="d-flex flex-column flex-md-row bg-light mb-4 top-0" style="position: sticky!important;">
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="/">Home</a>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="#offcanvas" data-bs-toggle="offcanvas">Catagorizes</a></li>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="about.html">About</a>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="blog.html">Blog</a>
+	</div>
 </header>
 {% block content %}
 
@@ -134,3 +123,7 @@
 		</div> <!-- /row of widgets -->
 	</div>
 </footer>
+	<script src={% static "js/html5shiv.js" %}></script> <![endif]-->
+	<script src={% static "js/template.js" %}></script> <![endif]-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
