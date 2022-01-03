@@ -21,7 +21,7 @@ def loginForm(request):
     context={
         "form":form
     }
-    return render(request,'loginForm.html',context)
+    return render(request, 'loginForm.html', context)
 def registerForm(request):
     form=registerform(request.POST or None)
     if request.user.is_authenticated:
@@ -39,4 +39,22 @@ def registerForm(request):
     context={
         "form":form
     }
-    return render(request,'registerForm.html',context)
+    return render(request, 'registerForm.html', context)
+
+def Edit_information(request):
+    me=User.objects.filter(username=request.user).first()
+
+    if request.method=='POST':
+        information = request.POST
+        # state=None
+        me.email=information['email']
+        me.first_name=information['first_name']
+        me.last_name=information['last_name']
+        me.set_password(information['password'])
+        print(information['password'])
+        me.save()
+
+    context={
+    # 'state':state
+    }
+    return render(request,'edit_info.html',context)

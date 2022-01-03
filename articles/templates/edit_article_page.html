@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+<p class="text-warning shadow-lg text-center p-4">welcome dear <a class="text-warning" href="/"><strong class="text-decoration-underline">{{ user.username }}</strong></a></p>
+<p class="text-warning shadow-lg text-center p-4">you are super user</p>
+<ul class="d-flex flex-column " style="list-style: none">
+        <li class="d-flex flex-row justify-content-center"> <p class="shadow-lg text-secondary px-5 py-2 mx-2 round" style="vertical-align: center ">count  paraghraph</p><p class="shadow-lg text-secondary px-5 py-2 round">{{ article_text.count }}</p></li>
+</ul>
+<form method="post" class="" name="form_find">
+    {% csrf_token %}
+    <div class="col-6 d-block mx-auto">
+            <select  onchange="this.form.submit()" class="form-control my-5 text-center" name="select" id="select">
+   {% for item in articles %}
+       {% if item.title == select_item %}
+        <option selected>{{ item.title }}</option>
+       {% else %}
+       <option>{{ item.title }}</option>
+       {% endif %}
+    {% endfor %}
+</select>
+    <input placeholder="title"  maxlength="100" class="form-control w-100 my-2" name="new_title" id="new_title">
+    <textarea  value="" name="new_text"  class="form-control w-100">
+
+    </textarea>
+    <input class="d-block bg-wrning btn my-3 p-2 mx-auto bg-warning text-light text-center  " type="submit" value="Add Paragraph">
+    </div>
+<h1 class="display-2 text-light text-center bg-secondary p-3 mx-auto col-6 ">  {{ article.title }}</h1>
+<p class="display-4  text-center  p-3 mx-auto col-6">{{ article.catagorize }}</p>
+<p class="text-muted fw-bolder m-5" style="font-style: italic" >{{ article.paragraph }}</p>
+<div class="p-5 border round m-3 ">
+    {% for text in article_text %}
+    {% if text.title %}
+        <h2 class="text-warning text-capitalize"  style="text-align: center ;font-family: Roboto">{{ text.title }}</h2>
+    {% endif %}
+       <div class="d-flex ">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="{{ text.id }}"  name="paragraph_{{ text.id }}">
+            <label class="form-check-label text-danger" for="{{ text.id }}">
+            paragtaph {{forloop.counter }}
+            </label>
+        </div>
+    <p class="text-center flex-grow-1 ms-5" >{{ text.text }}</p>
+       </div>
+
+{% endfor %}
+</div>
+</form>
+
+
+</body>
+</html>
+<script>
+
+</script>

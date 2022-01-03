@@ -23,6 +23,7 @@ urlpatterns = [
     path('',home),
     path('logout',Logout),
     path('',include("account.urls")),
+    path('article/',include("articles.urls")),
     path('articles',articles.as_view()),
     path('articles/search',search.as_view()),
     path('articles/<number>',article_detaile),

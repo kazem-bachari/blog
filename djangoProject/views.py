@@ -11,7 +11,9 @@ def home(request):
         'articles':articles[0:4],
         'catagorizes':catagorizes
     }
+    print(request.user.is_superuser)
     return render(request,'index.html',context)
+
 def Logout(request):
     logout(request)
     print(request)
