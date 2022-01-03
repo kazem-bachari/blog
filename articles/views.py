@@ -7,7 +7,6 @@ from articles.models import Articles,text
 
 def edit_article_page(request):
     articles = Articles.objects.all()
-
     if request.method=='POST':
 
         title = request.POST['select']
