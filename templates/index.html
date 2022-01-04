@@ -43,17 +43,25 @@
      <a href="/articles" class="bg-danger px-3 py-1 text-light d-block text-center w-25 mx-auto ">more</a>
 
 		{% for list in list_categorize %}
-            <h2 class="section-title"><span>test</span></h2>
+            <h2 class="section-title"></h2>
             <div class="row section recentworks topspace">
-                	{% for card in list %}
-                	<div class="col-sm-6 col-md-3">
+                {% for card in list %}
+                    <div class="col-sm-6 col-md-3">
+                    {% if forloop.counter == 1 %}
+                    <h4 style="display: block" class="text-uppercase mb-5 px-4 py-1 text-light w-100 text-center bg-success">{{ card.catagorize.catagorizes }}</h4>
+                     {% else %}
+                    <h4 style="" class="mb-5 px-4 py-1 text-light  opacity-0">{{ card.catagorize.catagorizes }}</h4>
+                     {% endif %}
 					<h3 class="text-center">{{ card.title }}</h3>
 					<p>{{ card.paragraph }}</p>
+
+
 					<p>{{ card.date|timesince }}</p>
 					<p class="text-center"><a href="articles/{{ card.id }}" class="btn btn-action">Read more</a></p>
 				</div>
             {% endfor %}
 		    </div>
+            <hr>
        {% endfor %}
 	</div>	<!-- /container -->
 

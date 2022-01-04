@@ -11,8 +11,10 @@ def home(request):
     for i in catagorizes:
         list_categorize_tem=[]
         query_object=Articles.objects.filter(catagorize__catagorizes=i.catagorizes)
+
         if query_object.count()>0:
-            list_categorize.append(query_object)
+           list_categorize.append(query_object)
+
             # print(query_object.values()[0].get('title'))
 
 
