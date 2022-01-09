@@ -1,7 +1,8 @@
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from articles.models import Articles, text, Tags, Catagorizes
+
+from articles.models import Articles, text, Tags, Catagorizes,comments
 from django.views.generic import ListView
 
 def home(request):
@@ -35,17 +36,27 @@ class articles(ListView):
     def get_queryset(self):
         return Articles.objects.all()
 def article_detaile(request,number):
-    article=Articles.objects.filter(id=number).first()
+    article = Articles.objects.filter(id=number).first()
+    if request.method=="POST":
+        username=request.user.username
+        email=request.user.email
+        forArticle=article.id
+        comment_text=request.POST.get("text_comment")
+        comments.objects.create(username=username,email=email,article_id=forArticle,text=comment_text)
+
     all_text=article.text_set.all()
     all_tags=article.tags_set.all()
     category=article.catagorize.catagorizes
     similar_articles=Articles.objects.filter(catagorize__catagorizes=category).exclude(id=number).distinct()
+    all_comments=article.comments_set.all()
+
     context={
         'article':article,
         'all_text':all_text,
         'all_tags':all_tags,
         'similar_articles':similar_articles,
-        'dd':[{"name":"kazem"}]
+        'all_comments':all_comments,
+
     }
     return render(request,'article_detaile.html',context)
 class search(ListView):

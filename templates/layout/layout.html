@@ -36,7 +36,7 @@
 				<a href="">{{ user.email }}</a></span>
 		</h1>
         {% if user.is_authenticated %}
-            <a href="logout" class=" btn bg-primary px-5 py-2 m-4 mx-auto w-25 d-block text-light ">logout</a>
+            <a href="/logout" class=" btn bg-primary px-5 py-2 m-4 mx-auto w-25 d-block text-light ">logout</a>
             <a href="edit_user" class=" btn bg-secondary px-5 py-2 m-4 mx-auto w-25 d-block text-light ">Edit my information</a>
         {% else %}
             <a href="/login" class=" btn bg-success px-5 py-2 m-4 mx-auto w-25 d-block text-light ">login</a>
@@ -48,11 +48,12 @@
 	</div>
 
 	<div class="d-flex flex-column flex-md-row bg-light mb-4 top-0" style="position: sticky!important;">
-        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="/">Home</a>
-        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="#offcanvas" data-bs-toggle="offcanvas">Catagorizes</a></li>
-        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="about.html">About</a>
-        <a class="flex-grow-1 px-4 py-4 text-mute text-center" href="blog.html">Blog</a>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center {% if request.path == "/"%} shadow-lg{% endif %}" href="/">Home</a>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center {% if request.path == "#offcanvas"%} shadow-lg{% endif %}" href="#offcanvas" data-bs-toggle="offcanvas">Catagorizes</a></li>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center {% if request.path == "/about"%} shadow-lg{% endif %}" href="about">About</a>
+        <a class="flex-grow-1 px-4 py-4 text-mute text-center {% if request.path == "/articles"%} shadow-lg{% endif %}" href="/articles">Blog</a>
 	</div>
+
 </header>
 {% block content %}
 

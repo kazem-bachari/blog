@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Articles, text, Tags,Catagorizes
+from .models import Articles, text, Tags,Catagorizes,comments
 
 
 class text_manager(admin.ModelAdmin):
@@ -28,3 +28,4 @@ admin.site.register(Articles,Articles_manager)
 admin.site.register(Catagorizes)
 admin.site.register(text,text_manager)
 admin.site.register(Tags,tag_manager)
+admin.site.register(comments)

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -40,7 +41,17 @@ class text(models.Model):
         verbose_name_plural="متن"
 
 
-
+class comments(models.Model):
+    username=models.CharField(max_length=100)
+    article=models.ForeignKey(Articles,on_delete=models.PROTECT,null=False,blank=False,default=' ')
+    email=models.EmailField(max_length=100)
+    text=models.TextField(max_length=300)
+    time=models.TimeField(auto_now_add=True)
+    class Meta:
+        verbose_name='نظرات'
+        verbose_name_plural="نظر"
+    def __str__(self):
+        return self.text
 class Tags(models.Model):
     tag = models.CharField(max_length=40,verbose_name='تگ')
     article=models.ManyToManyField(Articles)

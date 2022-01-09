@@ -54,6 +54,71 @@
          {% endfor %}
 	   </div>	<!-- /container -->
     </div>
+	<div class="row my-5">
+			<div class="col-sm-8 col-sm-offset-2">
 
+				<div id="comments">
+					<h3 class="comments-title  my-4">{{ all_comments.count }} Comments</h3>
+
+					<ol class="comments-list">
+						<li class="comment">
+							<div>
+                                {% for comment in all_comments %}
+                                    <div class="comment-meta">
+									<span class="author"><a href="#">{{ comment.username  }}</a></span>
+									<span class="date"><a href="#">{{ comment.time }}</a></span>
+									<span class="reply"><a href="#">Reply</a></span>
+								</div>
+
+								<div class="comment-body">
+								{{ comment.text }}
+								</div>
+                                {% endfor %}
+
+							</div>
+
+
+						</li>
+
+
+					</ol>
+
+					<div class="clearfix"></div>
+
+					<nav id="comment-nav-below" class="comment-navigation clearfix" role="navigation"><div class="nav-content">
+							<div class="nav-previous">&larr; Older Comments</div>
+							<div class="nav-next">Newer Comments &rarr;</div>
+					</div></nav><!-- #comment-nav-below -->
+
+
+					{% if user.is_authenticated %}
+                        <div id="respond ">
+						    <h3 id="reply-title">Leave a Reply</h3>
+						    <form action="" method="post" id="commentform" class="">
+                           {% csrf_token %}
+
+							<div class="form-group">
+								<label for="inputComment">Comment</label>
+								<textarea class="form-control" rows="6" name="text_comment"></textarea>
+							</div>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="checkbox">
+										<label> <input type="checkbox"> Subscribe to updates</label>
+									</div>
+								</div>
+								<div class="col-md-4 text-right">
+  									<button type="submit" class="btn btn-action">Submit</button>
+								</div>
+                            </div>
+					     	</form>
+                        </div>
+					{% endif %}
+				</div>
+			</div>
+		</div> <!-- /row comments -->
+		<div class="clearfix"></div>
 </main>
+
+
 {% endblock %}
